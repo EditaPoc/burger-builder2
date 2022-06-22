@@ -1,10 +1,10 @@
 import React from "react";
 import './Burger.css';
-import BurgerIngredient from './BurgerIngredient/BurgerINgredient';
+import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 
 
-export interface ingredientProps {
+export interface ingredientProperties {
     salad: number;
     bacon: number;
     cheese: number;
@@ -13,9 +13,12 @@ export interface ingredientProps {
   }
 
   interface Props {
-    ingredient: ingredientProps;
+    ingredients: ingredientProperties;
   }
+
 const burger = (props: Props) => {
+    let ingredients: JSX.Element;
+
     return (
         <div className="Burger">
             <BurgerIngredient type="bread-top" />

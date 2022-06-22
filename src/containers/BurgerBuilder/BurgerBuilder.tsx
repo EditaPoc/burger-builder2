@@ -1,15 +1,19 @@
 import React, {Component} from "react";
 import Aux from "../../hoc/Auxiliary";
-import Burger, { ingredientProps } from '../../components/Burger/Burger';
+import Burger, { ingredientProperties } from '../../components/Burger/Burger';
 
 interface State {
-    ingredients: ingredientProps;
-}    
+    ingredients: ingredientProperties;
+} 
+
+export type Disabled = {
+    [key: string]: number | boolean;
+  };
 class BurgerBuilder extends Component {
     render () {
         return (
             <Aux>
-                <Burger  />
+                <Burger ingredients={undefined} /> 
                 <div>Build Controls</div>
             </Aux>
         );
