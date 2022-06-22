@@ -13,7 +13,7 @@ class BurgerBuilder extends Component {
     render () {
         return (
             <Aux>
-                <Burger ingredients={undefined} /> 
+                <Burger  /> 
                 <div>Build Controls</div>
             </Aux>
         );

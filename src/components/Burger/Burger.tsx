@@ -1,6 +1,6 @@
 import React from "react";
 import './Burger.css';
-import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import BurgerIngredient from './BurgerIngredient/BurgerINgredient';
 
 
 
@@ -17,7 +17,7 @@ export interface ingredientProperties {
   }
 
 const burger = (props: Props) => {
-    let ingredients: JSX.Element;
+    //let ingredients: JSX.Element;
 
     return (
         <div className="Burger">
