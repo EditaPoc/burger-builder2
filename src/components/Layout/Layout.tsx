@@ -1,6 +1,7 @@
 import React from "react";
 import Aux from '../../hoc/Auxiliary';
 import './Layout.css';
+import Toolbar from '../Navigation/Toolbar/Toolbar';
 
 interface Props {
     children: React.ReactNode;
@@ -8,7 +9,7 @@ interface Props {
 
 const layout = (props: Props) => (
     <Aux>
-    <div className="Content">Toolbar, SideDrawer, Backdrop</div>
+    <Toolbar children={undefined} />
     <main className="Content">
         {props.children}
     </main>
