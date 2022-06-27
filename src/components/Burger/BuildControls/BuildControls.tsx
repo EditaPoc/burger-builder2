@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 //import { Props } from "../../../hoc/Auxiliary";
 import BuildControl from "./BuildContol/BuildControl";
 import './BuildControls.css'
@@ -12,6 +12,7 @@ export const controls = [
   ];
 
   interface Props {
+    ordered: MouseEventHandler;
     purchasable: boolean;
     ingredientAdded: (type: string) => void;
     ingredientRemoved: (type: string) => void;
@@ -31,7 +32,8 @@ const BuildControls = (props: Props) => (
                 disabled={props.disabled[ctrl.type]} />
         ))}
         <button className="OrderButton" 
-            disabled={!props.purchasable}>ORDER NOW</button>
+            disabled={!props.purchasable}
+            onClick={props.ordered}>ORDER NOW</button>
     </div>
 );
 
