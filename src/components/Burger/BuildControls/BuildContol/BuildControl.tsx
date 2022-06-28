@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler} from "react";
 import './BuildControl.css'
 
 export interface Props {
@@ -8,7 +8,7 @@ export interface Props {
     label: string;
 }
 
-const BuildControl = (props: Props) => (
+const buildControl = (props: Props) => (
     <div className="BuildControl">
         <div className="Label">{props.label}</div>
         <button 
@@ -19,4 +19,4 @@ const BuildControl = (props: Props) => (
     </div>
 );
 
-export default BuildControl;
+export default buildControl;

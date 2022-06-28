@@ -1,5 +1,4 @@
 import React from "react";
-//import { Props } from "../../../hoc/Auxiliary";
 import './Toolbar.css';
 import Logo from '../../Logo/Logo';
 import NavigationItems from "../NavigationItems/NavigationItems";
@@ -7,19 +6,18 @@ import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 
 interface Props {
     drawerToggleClicked: React.MouseEventHandler;
-    clicked: React.MouseEventHandler;
 
 }
 
-const Toolbar = (props: Props) => (
+const toolbar = (props: Props) => (
     <header className="Toolbar">
         <DrawerToggle clicked={props.drawerToggleClicked}/>
         {/* <div clicked={props.drawerToggleClicked}>MENU</div> */}
         <Logo />
         <nav  className="DesktopOnly">
-            <NavigationItems />
+            <NavigationItems key={null} type={undefined} props={undefined} />
         </nav>
     </header>
 );
 
-export default Toolbar;
+export default toolbar;

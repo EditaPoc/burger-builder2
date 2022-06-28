@@ -6,7 +6,7 @@ interface Props {
     type: string;
 }
 const burgerIngredient = (props: Props) => {
-    let ingredient: JSX.Element | null;
+    let ingredient: JSX.Element | null = null ;
 
     switch (props.type) {
         case "bread-bottom":

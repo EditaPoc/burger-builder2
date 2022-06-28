@@ -1,17 +1,16 @@
 import React, {Component} from "react";
 import Aux from '../../hoc/Auxiliary';
 import './Layout.css';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
-interface Props {
-    children: React.ReactNode;
+interface State {
     showSideDrawer: boolean;
-    drawerToggleClicked: () => void;
+   
 }
 
-class Layout extends React.Component<Props> {
-    state= {
+class Layout extends Component {
+    state: State = {
         showSideDrawer: false
     }
 
@@ -20,8 +19,8 @@ class Layout extends React.Component<Props> {
     }
 
     sideDrawerToggleHandler = () => {
-        this.setState(( prevState) => { 
-            return {showSideDrawer: !this.state.showSideDrawer}
+        this.setState(( prevState: State) => { 
+            return {showSideDrawer: !prevState.showSideDrawer};
         });
     }
         render() {

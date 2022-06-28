@@ -4,7 +4,7 @@ import './Backdrop.css';
 export interface Props {
     
     show: boolean;
-    clicked: React.MouseEventHandler;
+    clicked: MouseEventHandler;
 }
 const Backdrop = (props: Props) => 
     props.show ? <div className="Backdrop" onClick={props.clicked}></div> : null;

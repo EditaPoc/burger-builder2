@@ -20,7 +20,7 @@ export const controls = [
     price: number;
   }
 
-const BuildControls = (props: Props) => (
+const buildControls = (props: Props) => (
     <div className="BuildControls">
         <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
         {controls.map(ctrl => (
@@ -37,4 +37,4 @@ const BuildControls = (props: Props) => (
     </div>
 );
 
-export default BuildControls;
+export default buildControls;

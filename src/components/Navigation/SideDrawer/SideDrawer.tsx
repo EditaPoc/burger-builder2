@@ -10,7 +10,7 @@ interface SideDrawer {
     open: boolean;
   }
 
-const SideDrawer = (props: SideDrawer) => {
+const sideDrawer = (props: SideDrawer) => {
     let attachedClasses = ["SideDrawer", "Close"];
     if (props.open) {
         attachedClasses = ["SideDrawer", "Open"];
@@ -18,14 +18,14 @@ const SideDrawer = (props: SideDrawer) => {
     return (
         <Aux>
         <Backdrop show={props.open} clicked={props.closed}/>
-        <div className={attachedClasses.join(' ')}>
+        <div className={attachedClasses.join(" ")}>
             <Logo />
             <nav>
-                <NavigationItems />
+                <NavigationItems key={null} type={undefined} props={undefined} />
             </nav>
         </div>
         </Aux>
     );
 };
 
-export default SideDrawer;
+export default sideDrawer;
