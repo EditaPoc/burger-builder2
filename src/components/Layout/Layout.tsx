@@ -6,9 +6,11 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 interface Props {
     children: React.ReactNode;
+    showSideDrawer: boolean;
+    drawerToggleClicked: () => void;
 }
 
-class Layout extends Component {
+class Layout extends React.Component<Props> {
     state= {
         showSideDrawer: false
     }
@@ -16,17 +18,23 @@ class Layout extends Component {
     sideDrawerClosedHandler = () => {
         this.setState({showSideDrawer: false});
     }
-    render() {
-        return (
-            <Aux>
-            <Toolbar  />
-            <SideDrawer 
-                open={this.state.showSideDrawer} 
-                closed={this.sideDrawerClosedHandler}/>
-            <main className="Content">
-                {this.props.children}
-            </main>
-            </Aux>
+
+    sideDrawerToggleHandler = () => {
+        this.setState(( prevState) => { 
+            return {showSideDrawer: !this.state.showSideDrawer}
+        });
+    }
+        render() {
+            return (
+                <Aux>
+                <Toolbar  drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                <SideDrawer 
+                    open={this.state.showSideDrawer} 
+                    closed={this.sideDrawerClosedHandler}/>
+                <main className="Content">
+                    {this.props.children}
+                </main>
+                </Aux>
         )
     }
 } 
