@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, MouseEventHandler} from "react";
 import Aux from "../../hoc/Auxiliary";
 import Burger, { ingredientProperties } from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -12,8 +12,8 @@ interface State {
     purchasing: boolean;
 } 
 
-export type disabled = {
-    [key: string]:  boolean | number;
+export type Disabled = {
+    [key: string]:  number | boolean;
   };
 
   const INGREDIENT_PRICES: ingredientProperties = {
@@ -89,8 +89,8 @@ class BurgerBuilder extends Component {
     }
 
     render () {
-        const disabledInfo = {
-            ...this.state.ingredients,
+        let disabledInfo: Disabled = {
+            ...this.state.ingredients
         };
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
