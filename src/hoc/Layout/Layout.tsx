@@ -1,15 +1,17 @@
 import React, {Component} from "react";
-import Aux from '../../hoc/Auxiliary';
+import Aux from '../Auxiliary/Auxiliary';
 import './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 interface State {
     showSideDrawer: boolean;
-   
+}
+interface Props {
+    children: React.ReactNode;
 }
 
-class Layout extends Component {
+class Layout extends Component<Props> {
     state: State = {
         showSideDrawer: false
     }

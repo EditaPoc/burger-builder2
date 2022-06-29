@@ -6,8 +6,7 @@ interface Props {
 }
 
 const drawerToggle = (props: Props) => (
-    // <div  className="DrawerToggle" onClick={props.clicked}>
-      <div  onClick={props.clicked}> MENU  
+      <div className="DrawerToggle" onClick={props.clicked}> 
         <div></div>
         <div></div>
         <div></div>
