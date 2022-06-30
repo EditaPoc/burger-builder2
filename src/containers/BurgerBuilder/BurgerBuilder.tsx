@@ -5,6 +5,7 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import axios from '../../axios-orders';
 
 interface State {
@@ -37,6 +38,14 @@ class BurgerBuilder extends Component {
         purchasable: false,
         purchasing: false,
         loading: false
+    }
+
+    componentDidMount () {
+        axios.get('https://my-burger-builder-9fb9c-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json')
+        .then(response => {
+            
+        });
+
     }
 
     updatePurchaseState (ingredients: { [x: string]: any; salad?: number; bacon?: number; cheese?: number; meat?: number; }) {
@@ -149,4 +158,4 @@ class BurgerBuilder extends Component {
 
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);

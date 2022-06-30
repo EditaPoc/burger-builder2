@@ -3,7 +3,7 @@ import './Backdrop.css';
 
 export interface Props {
     
-    show: boolean;
+    show?: boolean | undefined | null;
     clicked: MouseEventHandler;
 }
 const Backdrop = (props: Props) => 
