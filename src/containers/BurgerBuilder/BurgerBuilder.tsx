@@ -37,7 +37,7 @@ class BurgerBuilder extends Component {
         totalPrice: 3,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,   
     }
 
     componentDidMount () {

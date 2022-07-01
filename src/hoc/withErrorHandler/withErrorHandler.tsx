@@ -1,21 +1,22 @@
 
-import React, {Component} from "react";
+import { AxiosInstance } from "axios";
+import React, {Component, ReactElement} from "react";
 import Modal from "../../components/UI/Modal/Modal";
 import Aux from "../Auxiliary/Auxiliary";
 
 
-const withErrorHandler = (WrappedComponent: any, axios: any) => {
+const withErrorHandler = (WrappedComponent: React.ElementType, axios: AxiosInstance) => {
     return class extends Component {
         state = {
-            error: null
+            error: null    
         }
 
         componentDidMount () {
-            axios.interceptor.request.use( (req?: boolean) => {
+            axios.interceptors.request.use( req => {
                 this.setState({error: null});
                 return req;
             });
-            axios.interceptors.response.use((res?: boolean) => res, (error?: boolean) => {
+            axios.interceptors.response.use(res => res, error => {
                 this.setState({error: error});
             });
         }
@@ -28,10 +29,14 @@ const withErrorHandler = (WrappedComponent: any, axios: any) => {
                 <Aux>
                     <Modal show={this.state.error}
                            modalClosed={this.errorConfirmedHandler}>
-                        {this.state.error ? this.state.error.message : null }
+                             something went wrong
+                        {/* {this.state.error ? this.state.error.message : null } */}
+                       
+                       
                     </Modal>
                     <WrappedComponent {...this.props} />
                 </Aux>
+                
             );
         }
     }
