@@ -1,6 +1,6 @@
 
 import { AxiosInstance } from "axios";
-import React, {Component, ReactElement} from "react";
+import React, {Component} from "react";
 import Modal from "../../components/UI/Modal/Modal";
 import Aux from "../Auxiliary/Auxiliary";
 

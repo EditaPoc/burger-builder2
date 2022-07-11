@@ -1,4 +1,5 @@
-import React, { Component, MouseEventHandler } from "react";
+import React, { Component } from "react";
+// import { History} from "history";
 import Aux from "../../hoc/Auxiliary/Auxiliary";
 import Burger, { ingredientProperties } from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -17,6 +18,11 @@ interface State {
   error: boolean;
 }
 
+// interface MyComponentProps {
+//   someOfYourOwnProps: any;
+//   history: History;
+//   someMorePropsIfNeedIt: any;
+//  }
 export type Disabled = {
   [key: string]: number | boolean;
 };
@@ -39,7 +45,7 @@ class BurgerBuilder extends Component {
     purchasable: false,
     purchasing: false,
     loading: false,
-    error: false,
+    error: false
   };
 
 //   componentDidMount() {
@@ -108,31 +114,33 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: false });
   };
 
-  purchaseContinueHandler = () => {
+  purchaseContinueHandler = (/*props: MyComponentProps*/) => {
     // alert('Continue');
-    this.setState({ loading: true });
-    const order = {
-      ingerdients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Jonas Antanaitis",
-        address: {
-          street: "Kretingos 11-10",
-          zipCode: "98638",
-          country: "Lithuania",
-        },
-        email: "jonas@jonas.com",
-      },
-      deliveryMethod: "fastest",
-    };
-    axios
-      .post("/orders.json", order)
-      .then((response) => {
-        this.setState({ loading: false, purchasing: false });
-      })
-      .catch((error) => {
-        this.setState({ loading: false, purchasing: false });
-      });
+    // this.setState({ loading: true });
+    // const order = {
+    //   ingerdients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: "Jonas Antanaitis",
+    //     address: {
+    //       street: "Kretingos 11-10",
+    //       zipCode: "98638",
+    //       country: "Lithuania",
+    //     },
+    //     email: "jonas@jonas.com",
+    //   },
+    //   deliveryMethod: "fastest",
+    // };
+    // axios
+    //   .post("/orders.json", order)
+    //   .then((response) => {
+    //     this.setState({ loading: false, purchasing: false });
+    //   })
+    //   .catch((error) => {
+    //     this.setState({ loading: false, purchasing: false });
+    //   });
+    this.props.history.push('/checkout');
+    
   };
 
   render() {
