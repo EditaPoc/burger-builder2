@@ -4,6 +4,20 @@
     margin: auto;
 }
 
+.BackLink {
+    text-decoration: none;
+    color: #944317;
+    font-weight: bold;
+    margin-right: 50px;
+
+}
+
+.LinkButton {
+    text-decoration: none;
+    color: #5c9210;
+    font-weight: bold;
+}
+
 @media (min-width: 600px) {
     .CheckoutSummary {
         width: 500px;

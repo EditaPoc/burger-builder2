@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 
 
@@ -22,25 +22,26 @@ class Checkout extends Component {
     }
 
     checkoutCancelledHandler = () => {
-       this.props.history.goBack(); 
+    //    this.props.history.goBack(); 
     }
 
     checkoutContinuedHandler = () => {
-        this.props.history.replace('/checkout/contact-data');
+        // this.props.history.replace('/checkout/contact-data');
     }
 
     render() {
         return (
             <div>
                 <CheckoutSummary 
-                    ingredients={this.state.ingredients} 
+                    ingredients={this.state.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler}
-                // clicked={function (): void {
+                    checkoutContinued={this.checkoutContinuedHandler} clicked={function (): void {
+                        throw new Error("Function not implemented.");
+                    } } btnType={""}                // clicked={function (): void {
                 //     throw new Error("Function not implemented.");
-                // } } btnType={""} purchaseCancelled={function (): void {
+                // } } btnType={""} checkoutCancelled={function (): void {
                 //     throw new Error("Function not implemented.");
-                // } } purchaseContinued={function (): void {
+                // } } checkoutContinued={function (): void {
                 //     throw new Error("Function not implemented.");
                 // } }
                  />

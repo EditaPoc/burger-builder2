@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import { ingredientProperties } from "../Burger";
-import Aux from '../../../hoc/Auxiliary/Auxiliary';
-import Button from '../../UI/Button/Button';
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Button from "../../UI/Button/Button";
+import { Link } from "react-router-dom";
+
 
 
 
@@ -34,7 +36,9 @@ class OrderSummary extends Component<Props> {
             <p><strong>Total Price: {this.props.price.toFixed(2)}</strong></p>
             <p>Continue to Checkout?</p>
             <Button btnType="Danger" clicked={this.props.purchaseCancelled}>CANCEL</Button>
-            <Button btnType="Success" clicked={this.props.purchaseContinued}>CONTINUE</Button>
+            <Button btnType="Success" clicked={this.props.purchaseContinued} >CONTINUE</Button>
+            
+            {/* <Link to={{pathname: '/checkout/'}} className="LinkButton">CONTINUE</Link> */}
         </Aux>
         ); 
     

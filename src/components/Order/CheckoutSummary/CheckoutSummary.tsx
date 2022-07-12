@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react";
+import { Link } from "react-router-dom";
 import Burger, { ingredientProperties } from "../../Burger/Burger";
 import Button from "../../UI/Button/Button";
 import "./CheckoutSummary.css";
@@ -7,8 +8,8 @@ interface Props {
     ingredients: ingredientProperties;
     clicked: MouseEventHandler;
     btnType: string;
-    purchaseCancelled: () => void;
-    purchaseContinued: () => void;
+    checkoutCancelled: () => void;
+    checkoutContinued: () => void;
     // children: JSX.Element | JSX.Element [] | string;
   }
 
@@ -19,12 +20,14 @@ const checkoutSummary = (props: Props) => {
             <div style={{width: '100%', transform: 'translateY(0)', margin: 'auto'}}>
                 <Burger ingredients={props.ingredients}  />
             </div>
-            <Button 
+            <Link to={{pathname: '/'}} className="BackLink">CANCEL</Link>
+            <Link to={{pathname: '/contact-data'}} className="LinkButton">CONTINUE</Link>
+            {/* <Button 
                 btnType="Danger"
-                clicked={props.purchaseCancelled}>CANCEL</Button>
+                clicked={props.checkoutCancelled}>CANCEL</Button>
             <Button 
                 btnType="Success"
-                clicked={props.purchaseContinued}>CONTINUE</Button>
+                clicked={props.checkoutContinued}>CONTINUE</Button> */}
         </div>
     )
 }

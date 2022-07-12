@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 
 import Layout from './hoc/Layout/Layout';
@@ -14,9 +14,9 @@ class App extends Component {
       <Layout>
         {/* <BurgerBuilder />
         <Checkout /> */}
-        
+       
       <Routes>
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="checkout" element={<Checkout />} />
         <Route path="/" element={<BurgerBuilder />} />
       </Routes>
         

@@ -27,3 +27,9 @@
     color: grey;
     cursor: not-allowed;
   }
+
+  .LinkButton {
+    text-decoration: none;
+    color: #5c9210;
+    font-weight: bold;
+  }
