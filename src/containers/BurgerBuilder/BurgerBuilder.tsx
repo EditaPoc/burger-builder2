@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-//import {  Link } from "react-router-dom";
+import React, { Component} from "react";
+import { History } from "history";
 
 import Aux from "../../hoc/Auxiliary/Auxiliary";
 import Burger, { ingredientProperties } from "../../components/Burger/Burger";
@@ -18,18 +18,11 @@ interface State {
   loading: boolean;
   error: boolean;
 }
-// interface Props{
-//   push: () => void ;
-//   history: "history";
-  // location: ['location'];
-  // match: ['match'];
-// }
 
-// interface MyComponentProps {
-//   someOfYourOwnProps: any;
-//   history: History;
-//   someMorePropsIfNeedIt: any;
-//  }
+interface Props {
+  history: History;
+}
+
 export type Disabled = {
   [key: string]: number | boolean;
 };
@@ -40,7 +33,7 @@ const INGREDIENT_PRICES: ingredientProperties = {
   meat: 1.3,
   bacon: 0.7,
 };
-class BurgerBuilder extends Component/*<Props>*/ {
+class BurgerBuilder extends Component<Props> {
   state: State = {
     ingredients: {
       salad: 0,
@@ -54,17 +47,17 @@ class BurgerBuilder extends Component/*<Props>*/ {
     loading: false,
     error: false,
   };
-  
-  // componentDidMount() {
-    // axios
-    //   .get("https://my-burger-builder-9fb9c-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json")
-    //   .then((response) => {
-    //     this.setState({ ingredients: response.data  });
-    //   })
-    //   .catch((error) => {
-    //     this.setState({ error: true });
-    //   });
-  // }
+
+  componentDidMount() {
+  axios
+    .get("https://my-burger-builder-9fb9c-default-rtdb.europe-west1.firebasedatabase.app/Ingredients.json")
+    .then((response) => {
+      this.setState({ ingredients: response.data  });
+    })
+    .catch((error) => {
+      this.setState({ error: true });
+    });
+  }
 
   updatePurchaseState(ingredients: {
     [x: string]: any;
@@ -122,7 +115,11 @@ class BurgerBuilder extends Component/*<Props>*/ {
   };
 
   purchaseContinueHandler = () => {
-    alert('Continue');
+    alert("Continue");
+    this.props.history?.push({
+      pathname: '/checkout',
+      search: ''
+    });
     // this.setState({ loading: true });
     // const order = {
     //   ingerdients: this.state.ingredients,
@@ -146,23 +143,19 @@ class BurgerBuilder extends Component/*<Props>*/ {
     //   .catch((error) => {
     //     this.setState({ loading: false, purchasing: false });
     //   });
-
-    // <Route path ="/" {...this.props.history.push("/checkout")} />
-    // let history = useHistory();
-    const queryParams: string[] = [];
-    for (let i in this.state.ingredients) {
-      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
-    }
-    const queryString = queryParams.join('&');
-    this.props.history<string>.push({
-      pathname: '/checkout',
-      search: '?' + queryString });
     
-    // <Link to={{pathname: '/checkout',
-    //            search: '?' + queryString }}>
-    // </Link>
-  };
-  
+    
+    // const queryParams: string[] = [];
+    // for (let i in this.state.ingredients) {
+    //   queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+    // }
+    // const queryString = queryParams.join('&');
+    // this.props.history?.push({
+    //   pathname: '/checkout',
+    //   search: '?' + queryString });
+
+    
+  }
 
   render() {
     let disabledInfo: Disabled = {
@@ -174,9 +167,11 @@ class BurgerBuilder extends Component/*<Props>*/ {
 
     let orderSummary = null;
     let burger = //this.state.error ? (
-    //  <p>Ingredients can't be loaded!</p>
-    // ) : (
-      <Spinner />
+      (
+        //  <p>Ingredients can't be loaded!</p>
+        // ) : (
+        <Spinner />
+      );
     // );
     if (this.state.ingredients) {
       burger = (
@@ -219,8 +214,3 @@ class BurgerBuilder extends Component/*<Props>*/ {
 }
 
 export default withErrorHandler(BurgerBuilder, axios);
-
-
-
-
-

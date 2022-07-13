@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import { Link } from "react-router-dom";
 import Burger, { ingredientProperties } from "../../Burger/Burger";
-import Button from "../../UI/Button/Button";
+// import Button from "../../UI/Button/Button";
 import "./CheckoutSummary.css";
 
 interface Props {
@@ -24,10 +24,12 @@ const checkoutSummary = (props: Props) => {
             <Link to={{pathname: '/contact-data'}} className="LinkButton">CONTINUE</Link>
             {/* <Button 
                 btnType="Danger"
-                clicked={props.checkoutCancelled}>CANCEL</Button>
+                clicked={props.checkoutCancelled}>CANCEL
+            </Button>
             <Button 
                 btnType="Success"
-                clicked={props.checkoutContinued}>CONTINUE</Button> */}
+                clicked={props.checkoutContinued}>CONTINUE
+            </Button> */}
         </div>
     )
 }

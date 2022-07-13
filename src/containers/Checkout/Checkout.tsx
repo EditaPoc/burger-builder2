@@ -1,17 +1,15 @@
 import { Component } from "react";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
+import { History, Location } from "history";
 
-
-export interface ingredientProperties {
-    salad: number;
-    bacon: number;
-    cheese: number;
-    meat: number;
-    [index: string]: number;
-  }
  
-  
-class Checkout extends Component {
+  interface NewProps {
+    history?: History;
+    // location: Location;
+    // checkoutCancelled: () => void;
+    // checkoutContinued: () => void;
+   }
+class Checkout extends Component<NewProps>{
     state = {
         ingredients: {
             salad: 1,
@@ -21,12 +19,22 @@ class Checkout extends Component {
         }
     }
 
-    checkoutCancelledHandler = () => {
-    //    this.props.history.goBack(); 
+    // componentDidMount() {
+    //     const query = new URLSearchParams(this.props.location.search);
+    //     const ingredients = {[]};
+    //     for (let param of query.entries() {
+    //         ingredients[param[0]] = +param[1];
+    //     }
+
+    //     this.setState({ingredients: ingredients})
+    // }
+
+    checkoutCancelledHandler = ()  => {
+       this.props.history?.back(); 
     }
 
     checkoutContinuedHandler = () => {
-        // this.props.history.replace('/checkout/contact-data');
+        this.props.history?.replace('/checkout/contact-data');
     }
 
     render() {
@@ -37,13 +45,7 @@ class Checkout extends Component {
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} clicked={function (): void {
                         throw new Error("Function not implemented.");
-                    } } btnType={""}                // clicked={function (): void {
-                //     throw new Error("Function not implemented.");
-                // } } btnType={""} checkoutCancelled={function (): void {
-                //     throw new Error("Function not implemented.");
-                // } } checkoutContinued={function (): void {
-                //     throw new Error("Function not implemented.");
-                // } }
+                    } } btnType={""}   
                  />
             </div>
         );
