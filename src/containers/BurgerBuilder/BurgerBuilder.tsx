@@ -52,7 +52,7 @@ class BurgerBuilder extends Component<Props> {
   axios
     .get("https://my-burger-builder-9fb9c-default-rtdb.europe-west1.firebasedatabase.app/Ingredients.json")
     .then((response) => {
-      this.setState({ ingredients: response.data  });
+      this.setState({ ingredients: response.data });
     })
     .catch((error) => {
       this.setState({ error: true });
@@ -115,11 +115,8 @@ class BurgerBuilder extends Component<Props> {
   };
 
   purchaseContinueHandler = () => {
-    alert("Continue");
-    this.props.history.push({
-      pathname: '/checkout',
-      search: ''
-    });
+    // alert("Continue");
+    
     // this.setState({ loading: true });
     // const order = {
     //   ingerdients: this.state.ingredients,
@@ -145,17 +142,19 @@ class BurgerBuilder extends Component<Props> {
     //   });
     
     
-    // const queryParams: string[] = [];
-    // for (let i in this.state.ingredients) {
-    //   queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
-    // }
-    // const queryString = queryParams.join('&');
-    // this.props.history?.push({
-    //   pathname: '/checkout',
-    //   search: '?' + queryString });
+    const queryParams: string[] = [];
+    console.log(this.state.ingredients);
 
+    for (let i in this.state.ingredients) {
+      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+    }
+    const queryString = queryParams.join('&');
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString });
+    // this.props.history.push('/checkout');
     
-  }
+  };
 
   render() {
     let disabledInfo: Disabled = {

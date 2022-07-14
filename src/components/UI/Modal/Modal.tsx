@@ -4,7 +4,7 @@ import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import Backdrop from '../Backdrop/Backdrop';
 
 interface Props {
-    show: boolean  | undefined | null;
+    show?: boolean  | undefined | null;
     children: React.ReactNode;
     modalClosed: MouseEventHandler;
 }

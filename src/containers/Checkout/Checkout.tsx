@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Link, Route } from "react-router-dom";
+import { match, Route } from "react-router-dom";
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";
@@ -8,12 +8,26 @@ import { History, Location } from "history";
 
 
 
- 
-  interface NewProps {
-    history?: History;
+interface State {
+    ingredients: ingredientProperties;
+}
+export interface ingredientProperties {
+    salad: number;
+    bacon: number;
+    cheese: number;
+    meat: number;
+    [index: string]: number;
+  }
+  interface Props {
+    history: History;
+    location: Location;
+    match: match<{}>;
+    path: string;
+    // [index: string]: number;
+    ingredients: ingredientProperties;
    }
-class Checkout extends Component<NewProps>{
-    state = {
+class Checkout extends Component<Props>{
+    state: State = {
         ingredients: {
             salad: 1,
             meat: 1, 
@@ -21,19 +35,23 @@ class Checkout extends Component<NewProps>{
             bacon: 1,
         }
     }
+    componentDidMount() {
+        
+        const query = new URLSearchParams(this.props.location.search);
+        console.log(this.props.location.search);
+        const ingredients = {...this.props.ingredients};
+        console.log(this.props.ingredients);
+        let param: string[] = [];
+        for ( param of query.entries()) {
+            ingredients[param[0]] = +param[1];
+        }
 
-    // componentDidMount() {
-    //     const query = new URLSearchParams(this.props.location.search);
-    //     const ingredients = {[]};
-    //     for (let param of query.entries() {
-    //         ingredients[param[0]] = +param[1];
-    //     }
-
-    //     this.setState({ingredients: ingredients})
-    // }
+        this.setState({ingredients: ingredients})
+        console.log(this.props.ingredients);
+    }
 
     checkoutCancelledHandler = ()  => {
-       this.props.history?.goBack(); 
+       this.props.history.goBack(); 
     }
 
     checkoutContinuedHandler = () => {
@@ -47,13 +65,12 @@ class Checkout extends Component<NewProps>{
                     ingredients={this.state.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} clicked={function (): void {
-                        throw new Error("Function not implemented.");
+                        // throw new Error("Function not implemented.");
                     } } btnType={""}   
                  />
                  
-                 <Route path="/contact-data" component={ContactData} />
-                
-                 {/* <Link to={'/contact-data'} /*element={ ContactData }*/ /> */}
+                 <Route path={this.props.match.path + "/contact-data"} component={ContactData} render={() => (<ContactData ingredients={this.state.ingredients} />)} />
+                 
             </div>
         );
     }
@@ -61,3 +78,4 @@ class Checkout extends Component<NewProps>{
 }
 
 export default Checkout;
+
