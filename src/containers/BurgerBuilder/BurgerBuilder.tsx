@@ -116,7 +116,7 @@ class BurgerBuilder extends Component<Props> {
 
   purchaseContinueHandler = () => {
     alert("Continue");
-    this.props.history?.push({
+    this.props.history.push({
       pathname: '/checkout',
       search: ''
     });

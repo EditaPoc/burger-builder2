@@ -1,13 +1,16 @@
 import { Component } from "react";
+import { Link, Route } from "react-router-dom";
+
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
+import ContactData from "./ContactData/ContactData";
+import "./ContactData/ContactData.css";
 import { History, Location } from "history";
+
+
 
  
   interface NewProps {
     history?: History;
-    // location: Location;
-    // checkoutCancelled: () => void;
-    // checkoutContinued: () => void;
    }
 class Checkout extends Component<NewProps>{
     state = {
@@ -30,7 +33,7 @@ class Checkout extends Component<NewProps>{
     // }
 
     checkoutCancelledHandler = ()  => {
-       this.props.history?.back(); 
+       this.props.history?.goBack(); 
     }
 
     checkoutContinuedHandler = () => {
@@ -39,7 +42,7 @@ class Checkout extends Component<NewProps>{
 
     render() {
         return (
-            <div>
+            <div className=".ContactData">
                 <CheckoutSummary 
                     ingredients={this.state.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
@@ -47,6 +50,10 @@ class Checkout extends Component<NewProps>{
                         throw new Error("Function not implemented.");
                     } } btnType={""}   
                  />
+                 
+                 <Route path="/contact-data" component={ContactData} />
+                
+                 {/* <Link to={'/contact-data'} /*element={ ContactData }*/ /> */}
             </div>
         );
     }
