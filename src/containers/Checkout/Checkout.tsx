@@ -1,16 +1,16 @@
 import { Component } from "react";
 import { match, Route } from "react-router-dom";
+import { History, Location } from "history";
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";
 import "./ContactData/ContactData.css";
-import { History, Location } from "history";
 
 
 
-interface State {
-    ingredients: ingredientProperties;
-}
+// interface State {
+//     ingredients: ingredientProperties;
+// }
 export interface ingredientProperties {
     salad: number;
     bacon: number;
@@ -25,29 +25,36 @@ export interface ingredientProperties {
     path: string;
     // [index: string]: number;
     ingredients: ingredientProperties;
+    price: number;
    }
 class Checkout extends Component<Props>{
-    state: State = {
+    state = {
         ingredients: {
-            salad: 1,
-            meat: 1, 
-            cheese: 1,
-            bacon: 1,
-        }
+            salad: 0,
+            meat: 0, 
+            cheese: 0,
+            bacon: 0,
+        },
+        totalPrice: 0
     }
     componentDidMount() {
         
         const query = new URLSearchParams(this.props.location.search);
-        console.log(this.props.location.search);
+        // console.log(this.props.location.search);
         const ingredients = {...this.props.ingredients};
-        console.log(this.props.ingredients);
-        let param: string[] = [];
-        for ( param of query.entries()) {
-            ingredients[param[0]] = +param[1];
+        // console.log(this.props.ingredients);
+        let params = [];
+        let price = 0;
+        for ( params of query.entries()) {
+            if (params[0] === 'price') {
+                price = params[1];
+            } else {
+                ingredients[params[0]] = +params[1];
+            }
         }
 
-        this.setState({ingredients: ingredients})
-        console.log(this.props.ingredients);
+        this.setState({ingredients: ingredients, totalPrice: price})
+        // console.log(this.props.ingredients);
     }
 
     checkoutCancelledHandler = ()  => {
@@ -69,7 +76,7 @@ class Checkout extends Component<Props>{
                     } } btnType={""}   
                  />
                  
-                 <Route path={this.props.match.path + "/contact-data"} component={ContactData} render={() => (<ContactData ingredients={this.state.ingredients} />)} />
+                 <Route path={this.props.match.path + "/contact-data"} render={() => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} />)} />
                  
             </div>
         );

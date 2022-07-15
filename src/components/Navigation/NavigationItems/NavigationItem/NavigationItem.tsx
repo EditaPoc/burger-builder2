@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
 import './NavigationItem.css';
 
 export interface Props {
@@ -9,10 +11,12 @@ export interface Props {
 
 const navigationItem = (props: Props) => (
     <li className="NavigationItem">
-        <a href={props.link} 
-        className={props.active ? "active" : undefined}>
-            {props.children}
-        </a>
+        <NavLink 
+            to={props.link}
+            exact
+            activeClassName="active">
+                {props.children}
+        </NavLink>
     </li>
 );
 
