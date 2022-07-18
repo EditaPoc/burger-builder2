@@ -1,5 +1,4 @@
 import React, { MouseEventHandler } from "react";
-//import { Props } from "../../../hoc/Auxiliary";
 import BuildControl from "./BuildContol/BuildControl";
 import './BuildControls.css'
 

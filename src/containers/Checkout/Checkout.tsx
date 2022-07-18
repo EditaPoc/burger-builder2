@@ -25,7 +25,7 @@ export interface ingredientProperties {
     path: string;
     // [index: string]: number;
     ingredients: ingredientProperties;
-    price: number;
+    // price: (string | number);
    }
 class Checkout extends Component<Props>{
     state = {
@@ -44,10 +44,13 @@ class Checkout extends Component<Props>{
         const ingredients = {...this.props.ingredients};
         // console.log(this.props.ingredients);
         let params = [];
-        let price = 0;
+        let price: (string | number);
+        price = '';
+        price = 0;
         for ( params of query.entries()) {
             if (params[0] === 'price') {
                 price = params[1];
+                // console.log(typeof(price));
             } else {
                 ingredients[params[0]] = +params[1];
             }
@@ -76,7 +79,7 @@ class Checkout extends Component<Props>{
                     } } btnType={""}   
                  />
                  
-                 <Route path={this.props.match.path + "/contact-data"} render={() => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} />)} />
+                 <Route path={this.props.match.path + "/contact-data"} render={(Props) => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} {...Props} />)} />
                  
             </div>
         );

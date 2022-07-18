@@ -5,13 +5,19 @@ import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import { ingredientProperties } from '../Checkout/Checkout';
 
+
   
   interface Props {
     ingredients: ingredientProperties;
    
   }
+
+  interface State {
+    orders: [] ;
+    loading: boolean;
+  }
 class Orders extends Component<Props> {
-    state = {
+    state: State = {
         orders: [],
         loading: true,
     }
@@ -38,11 +44,12 @@ class Orders extends Component<Props> {
     render () {
         return (
             <div>
-                {this.state.orders.map(order => (
+                {this.state.orders.map((order: { id: React.Key | null | undefined; ingredients: ingredientProperties; price: number; }) => (
                     <Order
-                        key={order.id} 
+                        key={order.id}
                         ingredients={order.ingredients}
-                        price={order.price} />
+                        price={order.price} name={{}} />
+
                 ))}
             </div>
         );

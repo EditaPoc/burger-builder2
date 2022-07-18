@@ -4,6 +4,7 @@ import { History } from "history";
 import Button from "../../../components/UI/Button/Button";
 import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import "./ContactData.css";
 
 export interface ingredientProperties {
   salad: number;
@@ -15,7 +16,7 @@ export interface ingredientProperties {
 
 interface Props {
   ingredients: ingredientProperties,
-  price: number
+  price: number,
   history?: History;
 }
 class ContactData extends Component<Props> {

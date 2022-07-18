@@ -60,11 +60,11 @@ class BurgerBuilder extends Component<Props> {
   }
 
   updatePurchaseState(ingredients: {
-    [x: string]: any;
-    salad?: number;
-    bacon?: number;
-    cheese?: number;
-    meat?: number;
+    [key: string]: number;
+    salad: number;
+    bacon: number;
+    cheese: number;
+    meat: number;
   }) {
     const sum = Object.keys(ingredients)
       .map((igKey) => {
