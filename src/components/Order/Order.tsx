@@ -20,9 +20,11 @@ interface orderProps {
     },
     price: number;
     name: {[x: string]: number};
+    amount: number;
+
 }
 const order = (props: orderProps) => {
-   const ingredients = [];
+   const ingredients/*: JSX.Element[]| JSX.Element*/ = [];
    for (let ingredientName in props.ingredients) {
    
         ingredients.push(
@@ -31,17 +33,18 @@ const order = (props: orderProps) => {
                 amount: props.ingredients[ingredientName]  
             }  
         );
+        
    } 
 
    const ingredientOutput: JSX.Element[]| JSX.Element = ingredients.map( ig => {
    
     return <span 
-        // style={{textTransform: 'capitalize',
-        //         display: 'inline-block',
-        //         margin: '0 8px',
-        //         border: '1px solid #ccc',
-        //         padding: '5px'
-        //      }} 
+        style={{textTransform: 'capitalize',
+                display: 'inline-block',
+                margin: '0 8px',
+                border: '1px solid #ccc',
+                padding: '5px'
+             }} 
              key={ig.name}>{ig.name} ({ig.amount})</span>;
              
    });

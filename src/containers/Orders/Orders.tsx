@@ -9,7 +9,8 @@ import { ingredientProperties } from '../Checkout/Checkout';
   
   interface Props {
     ingredients: ingredientProperties;
-   
+    id: React.Key | null | undefined;
+    price: number;
   }
 
   interface State {
@@ -48,7 +49,8 @@ class Orders extends Component<Props> {
                     <Order
                         key={order.id}
                         ingredients={order.ingredients}
-                        price={order.price} name={{}} />
+                        price={order.price}
+                        name={{}} amount={0} />
 
                 ))}
             </div>

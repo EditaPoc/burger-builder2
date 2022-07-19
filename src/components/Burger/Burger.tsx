@@ -1,4 +1,5 @@
 import React from "react";
+// import { withRouter } from 'react-router-dom';
 import './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
@@ -17,6 +18,7 @@ export interface ingredientProperties {
   }
 
 const burger = (props: Props) => {
+  console.log(props);
     let transformedIngredients: JSX.Element[]| JSX.Element = Object.keys(props.ingredients)
       .map(igKey => {
         return [...Array(props.ingredients[igKey])].map((_,i) => {
