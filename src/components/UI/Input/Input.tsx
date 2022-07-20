@@ -1,20 +1,21 @@
-import React, { HTMLInputTypeAttribute } from "react";
+import React, { HTMLInputTypeAttribute, MouseEventHandler } from "react";
 
 import "./Input.css";
 
 export type Inputtype = 'text' | 'email';
 
 interface InputProps {
+    options: {};
     // inputtype: HTMLInputTypeAttribute;
     label: string;
     // name: string;
     // placeholder: string;
     // type?: Inputtype;
     elementType: string;
-    elementConfig: [{}];
+    elementConfig: object;
     value: string;
+    changed: (event: any) => void;
 }
-
 const input = (props: InputProps) => {
     let inputElement= null;
     console.log(inputElement);
@@ -23,19 +24,30 @@ const input = (props: InputProps) => {
             inputElement = <input 
                 className="InputElement" 
                 {...props.elementConfig} 
-                value={props.value} />;
+                value={props.value} 
+                onChange={props.changed}/>;
             break;
-        case ('textarea'):
-            inputElement = <textarea 
+        case ('select'):
+            inputElement = (
+            <select 
                 className="InputElement" 
-                {...props.elementConfig} 
-                value={props.value} />; 
+                value={props.value}
+                onChange={props.changed}> 
+                {props.elementConfig.options.map(option => (
+                    <option key={option.value} value={option.value}>
+                        {option.displayValue}
+                    </option>
+                ))}
+            </select>
+                ); 
             break;
         default:
             inputElement = <input 
                 className="InputElement" 
                 {...props.elementConfig} 
-                value={props.value} />;      
+                value={props.value}
+                onChange={props.changed} />;
+                     
     }
 
     return (

@@ -12,15 +12,19 @@ export interface ingredientProperties {
   bacon: number;
   cheese: number;
   meat: number;
-  [index: string]: number;
+  [x: string]: number;
 }
 
-interface Props {
+interface ContactProps {
   ingredients: ingredientProperties,
   price: number,
   history?: History;
+  // event: MouseEventHandler;
+  // changed: (event: any) => void;
 }
-class ContactData extends Component<Props> {
+
+class ContactData extends Component<ContactProps> {
+  
   state = {
     orderForm: {
       fullname: {
@@ -67,24 +71,31 @@ class ContactData extends Component<Props> {
         elementType: 'select',
         elementConfig: {
           options: [
-            {value: 'fastest', displayValue: 'Fastest'},
-            {value: 'cheapest', displayValue: 'Cheapest'}
+            {value: 'delivery method', displayValue: 'Select Delivery Method'},
+            {value: 'cheapest', displayValue: 'Cheapest'},
+            {value: 'fastest', displayValue: 'Fastest'}
           ]
         },
         value: ''
       }
     },
     loading: false,
-  };
-
+    
+    };
+   
   orderHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log(this.props.ingredients);
+    // console.log(this.props.ingredients);
 
     this.setState({ loading: true });
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm){
+        formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+    }
     const order = {
       ingerdients: this.props.ingredients,
       price: this.props.price,
+      orderData: formData
       
     };
     axios
@@ -97,9 +108,24 @@ class ContactData extends Component<Props> {
         this.setState({ loading: false });
       });
   };
+ 
+  inputChangedHandler = (event: { target: { value: string; }; }, inputIdentifier: string) => {
+    // console.log(event.target.value);
+    console.log(typeof(event));
+    const updatedOrderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    };
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({orderForm: updatedOrderForm});
+  }
 
   render() {
-    const formElementsArray = [];
+    const formElementsArray =  [];
+   
     for (let key in this.state.orderForm) {
       formElementsArray.push({
         id: key,
@@ -107,16 +133,17 @@ class ContactData extends Component<Props> {
       });
     }
     let form = (
-        <form>
+        <form onSubmit={this.orderHandler}>
         {formElementsArray.map(formElement => (
           <Input 
             key={formElement.id}
             elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig} 
-            value={formElement.config.value} 
-            label=""/>
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            label="" options={[]} />
         ))}
-        <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+        <Button btnType="Success" clicked={this.orderHandler} >ORDER</Button>
       </form>
     );
         if (this.state.loading) {
