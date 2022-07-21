@@ -8,7 +8,7 @@ interface InputProps {
     options:  null | undefined;
     label: string | null;
     elementType: string;
-    elementConfig: React.Component;
+    elementConfig: JSX.Element[] | JSX.Element | any;
     value: string;
     changed: (event: any) => void;
 }
