@@ -10,7 +10,7 @@ import "./Order.css";
 //     meat: number;
 //     [x: string]: number;
 //   }
-interface orderProps {
+interface OrderProps {
     ingredients: {
         salad: number;
         bacon: number;
@@ -19,14 +19,14 @@ interface orderProps {
         [x: string]: number;
     },
     price: number;
-    name: {[x: string]: number};
+    ingredientName: {[x: string]: number};
     amount: number;
 
 }
-const order = (props: orderProps) => {
+const order = (props: OrderProps) => {
    const ingredients/*: JSX.Element[]| JSX.Element*/ = [];
    for (let ingredientName in props.ingredients) {
-   
+   console.log(ingredientName);
         ingredients.push(
             {
                 name: ingredientName, 

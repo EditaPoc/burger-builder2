@@ -10,16 +10,16 @@ export const controls = [
     { label: "Meat", type: "meat" },
   ];
 
-  interface Props {
+  interface BuildProps {
     ordered: MouseEventHandler;
     purchasable: boolean;
     ingredientAdded: (type: string) => void;
     ingredientRemoved: (type: string) => void;
-    disabled: { [key: string]: any };
+    disabled: { [key: string]: any};
     price: number;
   }
 
-const buildControls = (props: Props) => (
+const buildControls = (props: BuildProps) => (
     <div className="BuildControls">
         <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
         {controls.map(ctrl => (

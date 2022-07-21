@@ -50,7 +50,7 @@ class Orders extends Component<Props> {
                         key={order.id}
                         ingredients={order.ingredients}
                         price={order.price}
-                        name={{}} amount={0} />
+                        ingredientName={{}} amount={0} />
 
                 ))}
             </div>

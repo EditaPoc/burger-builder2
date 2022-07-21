@@ -18,16 +18,15 @@ export interface ingredientProperties {
     meat: number;
     [index: string]: number;
   }
-  interface Props {
+  interface CheckoutProps {
     history: History;
     location: Location;
     match: match<{}>;
     path: string;
-    // [index: string]: number;
+    // [x: string]: number;
     ingredients: ingredientProperties;
-    // price: (string | number);
    }
-class Checkout extends Component<Props>{
+class Checkout extends Component<CheckoutProps>{
     state = {
         ingredients: {
             salad: 0,

@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component, ReactComponentElement} from "react";
 import { History } from "history";
 
 import Button from "../../../components/UI/Button/Button";
@@ -19,15 +19,13 @@ interface ContactProps {
   ingredients: ingredientProperties,
   price: number,
   history?: History;
-  // event: MouseEventHandler;
-  // changed: (event: any) => void;
 }
 
 class ContactData extends Component<ContactProps> {
   
   state = {
     orderForm: {
-      fullname: {
+      name: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
@@ -111,7 +109,7 @@ class ContactData extends Component<ContactProps> {
  
   inputChangedHandler = (event: { target: { value: string; }; }, inputIdentifier: string) => {
     // console.log(event.target.value);
-    console.log(typeof(event));
+
     const updatedOrderForm = {
       ...this.state.orderForm
     };
@@ -129,7 +127,7 @@ class ContactData extends Component<ContactProps> {
     for (let key in this.state.orderForm) {
       formElementsArray.push({
         id: key,
-        config: this.state.orderForm[key]
+        config: this.props.orderForm[key]
       });
     }
     let form = (
@@ -141,7 +139,7 @@ class ContactData extends Component<ContactProps> {
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
-            label="" options={[]} />
+            options={undefined} label={null}/>
         ))}
         <Button btnType="Success" clicked={this.orderHandler} >ORDER</Button>
       </form>

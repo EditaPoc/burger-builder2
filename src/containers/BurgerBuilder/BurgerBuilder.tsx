@@ -19,7 +19,7 @@ interface State {
   error: boolean;
 }
 
-interface Props {
+interface BuilderProps {
   history: History;
 }
 
@@ -33,7 +33,7 @@ const INGREDIENT_PRICES: ingredientProperties = {
   meat: 1.3,
   bacon: 0.7,
 };
-class BurgerBuilder extends Component<Props> {
+class BurgerBuilder extends Component<BuilderProps> {
   state: State = {
     ingredients: {
       salad: 0,
@@ -116,10 +116,6 @@ class BurgerBuilder extends Component<Props> {
 
   purchaseContinueHandler = () => {
     // alert("Continue");
-    
-    
-    
-    
     const queryParams = [];
     console.log(this.state.ingredients);
 
@@ -131,8 +127,6 @@ class BurgerBuilder extends Component<Props> {
     this.props.history.push({
       pathname: '/checkout',
       search: '?' + queryString });
-    // this.props.history.push('/checkout');
-    
   };
 
   render() {

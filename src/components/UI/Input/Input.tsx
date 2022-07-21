@@ -1,18 +1,14 @@
-import React, { HTMLInputTypeAttribute, MouseEventHandler } from "react";
+import React, { ReactElement } from "react";
 
 import "./Input.css";
 
-export type Inputtype = 'text' | 'email';
+// export type Inputtype = 'text' | 'email';
 
 interface InputProps {
-    options: {};
-    // inputtype: HTMLInputTypeAttribute;
-    label: string;
-    // name: string;
-    // placeholder: string;
-    // type?: Inputtype;
+    options:  null | undefined;
+    label: string | null;
     elementType: string;
-    elementConfig: object;
+    elementConfig: React.Component;
     value: string;
     changed: (event: any) => void;
 }
