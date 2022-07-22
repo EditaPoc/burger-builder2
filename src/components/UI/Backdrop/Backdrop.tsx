@@ -2,7 +2,6 @@ import React, { MouseEventHandler } from "react";
 import './Backdrop.css';
 
 export interface Props {
-    
     show?: boolean | undefined | null;
     clicked: MouseEventHandler;
 }

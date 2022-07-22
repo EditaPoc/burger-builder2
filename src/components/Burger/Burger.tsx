@@ -10,7 +10,7 @@ export interface ingredientProperties {
     bacon: number;
     cheese: number;
     meat: number;
-    [index: string]: number;
+    [x: string]: number;
   }
 
   interface Props {

@@ -6,11 +6,6 @@ import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from "./ContactData/ContactData";
 import "./ContactData/ContactData.css";
 
-
-
-// interface State {
-//     ingredients: ingredientProperties;
-// }
 export interface ingredientProperties {
     salad: number;
     bacon: number;
@@ -23,10 +18,10 @@ export interface ingredientProperties {
     location: Location;
     match: match<{}>;
     path: string;
-    // [x: string]: number;
     ingredients: ingredientProperties;
    }
 class Checkout extends Component<CheckoutProps>{
+   
     state = {
         ingredients: {
             salad: 0,
@@ -49,7 +44,6 @@ class Checkout extends Component<CheckoutProps>{
         for ( params of query.entries()) {
             if (params[0] === 'price') {
                 price = params[1];
-                // console.log(typeof(price));
             } else {
                 ingredients[params[0]] = +params[1];
             }
@@ -75,7 +69,7 @@ class Checkout extends Component<CheckoutProps>{
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} clicked={function (): void {
                         // throw new Error("Function not implemented.");
-                    } } btnType={""}   
+                    } } btnType={"string"}   
                  />
                  
                  <Route path={this.props.match.path + "/contact-data"} render={(Props) => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} {...Props} />)} />

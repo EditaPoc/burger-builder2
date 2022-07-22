@@ -7,22 +7,21 @@ import { ingredientProperties } from '../Checkout/Checkout';
 
 
   
-  interface Props {
-    ingredients: ingredientProperties;
-    id: React.Key | null | undefined;
-    price: number;
-  }
+//   interface Props {
+//     // ingredients: ingredientProperties;
+//     // id: React.Key | null | undefined;
+//     // price: number;
+//   }
 
   interface State {
     orders: [] ;
     loading: boolean;
   }
-class Orders extends Component<Props> {
+class Orders extends Component/*<Props>*/ {
     state: State = {
         orders: [],
         loading: true,
     }
-
 
     componentDidMount() {
         axios.get('/orders.json')
@@ -49,8 +48,7 @@ class Orders extends Component<Props> {
                     <Order
                         key={order.id}
                         ingredients={order.ingredients}
-                        price={order.price}
-                        ingredientName={{}} amount={0} />
+                        price={order.price} />
 
                 ))}
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { ingredientProperties } from "../Burger/Burger";
 
 import "./Order.css";
 
@@ -11,32 +12,24 @@ import "./Order.css";
 //     [x: string]: number;
 //   }
 interface OrderProps {
-    ingredients: {
-        salad: number;
-        bacon: number;
-        cheese: number;
-        meat: number;
-        [x: string]: number;
-    },
+    ingredients: ingredientProperties,
     price: number;
-    ingredientName: {[x: string]: number};
-    amount: number;
 
 }
 const order = (props: OrderProps) => {
-   const ingredients/*: JSX.Element[]| JSX.Element*/ = [];
+    console.log(props.ingredients);
+    console.log(props.price);
+   const ingredients = [];
    for (let ingredientName in props.ingredients) {
-   console.log(ingredientName);
         ingredients.push(
             {
                 name: ingredientName, 
                 amount: props.ingredients[ingredientName]  
-            }  
-        );
-        
+            }    
+        );   
    } 
 
-   const ingredientOutput: JSX.Element[]| JSX.Element = ingredients.map( ig => {
+   const ingredientOutput: JSX.Element[] | JSX.Element = ingredients.map( ig => {
    
     return <span 
         style={{textTransform: 'capitalize',
