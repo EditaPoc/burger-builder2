@@ -8,26 +8,36 @@ interface OptionProps {
     value: string;
     displayValue: string;
 }
+
+// interface ValidationProps {
+//     required?: boolean;
+//     minLenght?: number;
+//     maxLenght?: number;
+// }
 interface InputProps {
-    shouldValidate?: boolean | undefined;
-    invalid?: boolean;
-    label: string | null;
+    shouldValidate: boolean;
+    invalid: boolean;
+    label?: string | null;
     elementType: string;
     elementConfig: {
         type?: string;
         placeholder?: string;
-        options?: Array<OptionProps>
+        options?: Array<OptionProps>;
     };
-    valid?: boolean;
+    validation: {
+        required?: boolean;
+        minLenght?: number;
+        maxLenght?: number;
+    };
+    touched: boolean;
     value: string;
-    changed: (event: any) => void;
-    className?: React.HTMLAttributes<Text> | string | undefined;
+    changed: (event: never) => void;
 }
 const input = (props: InputProps) => {
     let inputElement= null;
     const inputClasses = ["InputElement"];
 
-    if( props.invalid && props.shouldValidate) {
+    if( props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push("Invalid");
     }
     // console.log(inputElement);

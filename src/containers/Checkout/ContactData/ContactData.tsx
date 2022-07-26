@@ -23,65 +23,17 @@ interface ContactProps {
   ingredients: ingredientProperties;
   price: number;
   history?: History;
+}
 
-  // orderForm: {
-  //   fullname: {
-  //     elementType: string;
-  //     value: string;
-  //     elementConfig: {
-  //       type: string;
-  //       placeholder: string;
-  //       options?: [] | undefined;
-  //     }
-  //   };
-  //   street: {
-  //     elementType: string;
-  //     value: string;
-  //     elementConfig: {
-  //       type: string;
-  //       placeholder: string;
-  //       options?: [] | undefined;
-  //     }
-  //   };
-  //   zipCode: {
-  //     elementType: string;
-  //     value: string;
-  //     elementConfig: {
-  //       type: string;
-  //       placeholder: string;
-  //       options?: [] | undefined;
-  //     }
-  //   };
-  //   country: {
-  //     elementType: string;
-  //     value: string;
-  //     elementConfig: {
-  //       type: string;
-  //       placeholder: string;
-  //       options?: [] | undefined;
-  //     }
-  //   };
-  //   email: {
-  //     elementType: string;
-  //     value: string;
-  //     elementConfig: {
-  //       type: string;
-  //       placeholder: string;
-  //       options?: [] | undefined;
-  //     }
-  //   };
-  //   deliveryMethod: {
-  //     elementType: string;
-  //     value: string;
-  //     elementConfig: {
-  //       options?: Array<OptionProps>;
-  //   }
-  // };
-  // }
+interface RulesProps {
+  required: boolean;
+  minLength?: number;
+  maxLength?: number;
 }
 
 interface State {
   loading: boolean;
+  formIsValid: boolean;
   orderForm: {
     fullname: {
       elementType: string;
@@ -91,9 +43,10 @@ interface State {
       };
       value: string;
       validation:{
-        required:boolean
+        required:boolean;
       };
       valid: boolean;
+      touched: boolean;
     };
     street: {
       elementType: string;
@@ -103,9 +56,10 @@ interface State {
         placeholder: string;
       };
       validation: {
-        required:boolean
+        required:boolean;
       };
       valid: boolean;
+      touched: boolean;
     };
     zipCode: {
       elementType: string;
@@ -115,11 +69,12 @@ interface State {
         placeholder: string;
       };
       validation: {
-        required: boolean
+        required: boolean;
+        minLength: number;
+        maxLength: number;
       };
       valid: boolean;
-      minLength: number,
-      maxLength: number
+      touched: boolean;
     };
     country: {
       elementType: string;
@@ -129,9 +84,10 @@ interface State {
         placeholder: string;
       };
       validation:{
-        required:boolean
+        required:boolean;
       };
       valid: boolean;
+      touched: boolean;
     };
     email: {
       elementType: string;
@@ -141,21 +97,26 @@ interface State {
         placeholder: string;
       };
       validation:{
-        required:boolean
+        required: boolean;
       };
       valid: boolean;
+      touched: boolean;
     };
     deliveryMethod: {
       elementType: string;
       value: string;
       elementConfig: {
-        options?: Array<OptionProps>;
+        options: Array<OptionProps>;
       };
+      validation:{
+        required: boolean;
+      };
+      valid: boolean;
+      touched: boolean;
     };
   };
 };
   
-
 class ContactData extends Component<ContactProps> {
   state: State = {
     orderForm: {
@@ -169,7 +130,8 @@ class ContactData extends Component<ContactProps> {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       street: {
         elementType: "input",
@@ -181,7 +143,8 @@ class ContactData extends Component<ContactProps> {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       zipCode: {
         elementType: "input",
@@ -192,10 +155,12 @@ class ContactData extends Component<ContactProps> {
         value: "",
         validation: {
           required: true,
-        },
           minLength: 5,
           maxLength: 5,
-          valid: false
+        },
+         
+          valid: false,
+          touched: false
       },
       country: {
         elementType: "input",
@@ -207,7 +172,8 @@ class ContactData extends Component<ContactProps> {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       email: {
         elementType: "input",
@@ -219,23 +185,27 @@ class ContactData extends Component<ContactProps> {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       deliveryMethod: {
         elementType: "select",
         elementConfig: {
           options: [
-            {
-              value: "delivery method",
-              displayValue: "Select Delivery Method",
-            },
+            { value: "delivery method", displayValue: "Select Delivery Method" },
             { value: "cheapest", displayValue: "Cheapest" },
-            { value: "fastest", displayValue: "Fastest" },
+            { value: "fastest", displayValue: "Fastest" }
           ],
         },
         value: "",
+        validation: {
+          required: false
+        },
+        valid: true,
+        touched: false
       },
     },
+    formIsValid: false,
     loading: false,
   };
 
@@ -266,10 +236,7 @@ class ContactData extends Component<ContactProps> {
       });
   };
 
-  checkValidity(value: string, rules: {
-    maxLength: number;
-    minLength: number; required: boolean; 
-}) {
+  checkValidity(value: string, rules: RulesProps) {
     let isValid = true;
     if (rules.required) {
       isValid = value.trim() !== '' && isValid;
@@ -298,9 +265,16 @@ class ContactData extends Component<ContactProps> {
     };
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation); 
-    console.log(updatedFormElement);
+    updatedFormElement.touched = true;
+    // console.log(updatedFormElement);
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
+    console.log(formIsValid);
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    this.setState({ orderForm: updatedOrderForm });
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 
   render() {
@@ -321,10 +295,10 @@ class ContactData extends Component<ContactProps> {
             value={formElement.config.value}
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)}
-            label={null} valid={false}          />
+            touched={formElement.config.touched}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}  />
         ))}
-        <Button btnType="Success" clicked={this.orderHandler}>
+        <Button btnType="Success" clicked={this.orderHandler} disabled={!this.state.formIsValid}>
           ORDER
         </Button>
       </form>
