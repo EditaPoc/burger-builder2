@@ -1,5 +1,6 @@
 import React, { Component} from "react";
 import { History } from "history";
+import { connect } from "react-redux";
 
 import Aux from "../../hoc/Auxiliary/Auxiliary";
 import Burger, { ingredientProperties } from "../../components/Burger/Burger";
@@ -9,9 +10,15 @@ import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import axios from "../../axios-orders";
-
+import * as actionTypes from "../../store/actions";
 interface State {
-  ingredients: ingredientProperties;
+  ingredients: {
+    salad: number;
+    bacon: number;
+    cheese: number;
+    meat: number;
+    [x: string]: number;
+  },
   totalPrice: number;
   purchasable: boolean;
   purchasing: boolean;
@@ -185,4 +192,23 @@ class BurgerBuilder extends Component<BuilderProps> {
   }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+const mapStateToProps = (state: {  
+  ingredients: {
+  salad: 0,
+  bacon: 0,
+  cheese: 0,
+  meat: 0,
+  [x: string]: number; }}) => {
+  return {
+    ings: state.ingredients
+  };
+}
+
+const mapDispatchToPoprs = (dispatch: (arg0: { type: string; ingredientName: string | { [x: string]: number; }; }) => unknown) => {
+  return {
+    onIngredientAdded: (ingName: { [x: string]: number; }) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
+    onIngredientRemoved: (ingName: string ) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToPoprs) ( withErrorHandler(BurgerBuilder, axios));

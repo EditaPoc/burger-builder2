@@ -270,7 +270,7 @@ class ContactData extends Component<ContactProps> {
 
     let formIsValid = true;
     for (let inputIdentifier in updatedOrderForm) {
-      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+      formIsValid = updatedOrderForm[inputIdentifier as unknown as keyof typeof this.state.orderForm].valid && formIsValid;
     }
     console.log(formIsValid);
     updatedOrderForm[inputIdentifier] = updatedFormElement;

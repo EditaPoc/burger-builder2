@@ -2,7 +2,7 @@ import React, { MouseEventHandler} from "react";
 import './BuildControl.css'
 
 export interface Props {
-    disabled: boolean;
+    disabled?: boolean;
     added: MouseEventHandler;
     removed: MouseEventHandler;
     label: string;

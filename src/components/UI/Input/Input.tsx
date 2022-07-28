@@ -9,14 +9,20 @@ interface OptionProps {
     displayValue: string;
 }
 
+interface ValidationProps {
+    required?: boolean;
+    minLenght?: number;
+    maxLenght?: number;
+}
+
 // interface ValidationProps {
 //     required?: boolean;
 //     minLenght?: number;
 //     maxLenght?: number;
 // }
 interface InputProps {
-    shouldValidate: boolean;
-    invalid: boolean;
+    shouldValidate?: boolean | undefined;
+    invalid?: boolean;
     label?: string | null;
     elementType: string;
     elementConfig: {
@@ -24,11 +30,7 @@ interface InputProps {
         placeholder?: string;
         options?: Array<OptionProps>;
     };
-    validation: {
-        required?: boolean;
-        minLenght?: number;
-        maxLenght?: number;
-    };
+    validation: ValidationProps;
     touched: boolean;
     value: string;
     changed: (event: never) => void;

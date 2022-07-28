@@ -15,7 +15,7 @@ export const controls = [
     purchasable: boolean;
     ingredientAdded: (type: string) => void;
     ingredientRemoved: (type: string) => void;
-    disabled: { [key: string]: any};
+    disabled: { [key: string]: any | boolean};
     price: number;
   }
 
